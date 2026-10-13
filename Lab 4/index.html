@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discussion Board Registration</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <dialog id="registrationDialog" open>
+
+        <h1>Discussion Board Registration</h1>
+
+        <form id="registrationForm">
+
+            <fieldset>
+                <legend>Account Details</legend>
+
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username"
+                       pattern=".*\S.*" required>
+                <br><br>
+
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password"
+                    minlength="8" maxlength="12" required>
+
+                <p class="hint">
+                    Password must be 8-12 characters and contain an
+                    uppercase letter, lowercase letter, number and
+                    special character.
+                </p>
+
+
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required>
+                <br><br>
+
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob">
+
+                <p class="hint">
+                    Optional. Your date of birth helps us provide
+                    age-appropriate content.
+                </p>
+
+            </fieldset>
+
+            <fieldset>
+                <legend>Additional Information</legend>
+
+                <p>Purpose of Joining:</p>
+
+                <input type="checkbox" id="work" name="purpose" value="Work">
+                <label for="work">Work</label>
+
+                <input type="checkbox" id="hobbies" name="purpose" value="Hobbies">
+                <label for="hobbies">Hobbies</label>
+
+                <input type="checkbox" id="entertainment" name="purpose" value="Entertainment">
+                <label for="entertainment">Entertainment</label>
+
+                <br><br>
+
+                <label for="boards">Boards of Interest:</label>
+                <select id="boards" name="boards" multiple>
+                    <option value="Technology">Technology</option>
+                    <option value="Gaming">Gaming</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Music">Music</option>
+                </select>
+
+                <p class="hint">
+                    Hold Ctrl (or Cmd on Mac) to select multiple boards.
+                </p>
+
+                <p>Volunteering Availability:</p>
+
+                <input type="radio" id="none" name="volunteer"
+                       value="Not Available" checked>
+                <label for="none">Not Available</label>
+
+                <input type="radio" id="one" name="volunteer" value="1 Hour">
+                <label for="one">1 Hour</label>
+
+                <input type="radio" id="two" name="volunteer" value="2-3 Hours">
+                <label for="two">2-3 Hours</label>
+
+                <input type="radio" id="four" name="volunteer" value="4-5 Hours">
+                <label for="four">4-5 Hours</label>
+
+            </fieldset>
+
+            <br>
+            <button type="submit">Register</button>
+
+        </form>
+
+    </dialog>
+
+    <div id="confirmation"></div>
+
+</body>
+</html>
