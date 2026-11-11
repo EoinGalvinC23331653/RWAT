@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dining data</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <main>
+        <h1>Dining data</h1>
+
+        <section id="filterPanel" aria-label="Filters">
+            <div id="filterToolbar">
+                <label for="filterField">Add filter:</label>
+
+                <select id="filterField">
+                    <option value="">Add filter</option>
+                </select>
+
+                <button id="apply" type="button">Apply</button>
+            </div>
+
+            <div id="activeFilters" aria-label="Active filters"></div>
+
+            <p id="message" role="status" aria-live="polite"></p>
+        </section>
+
+        <p id="resultCount" aria-live="polite"></p>
+
+        <div id="tableContainer"></div>
+    </main>
+</body>
+</html>

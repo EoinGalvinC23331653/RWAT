@@ -1,0 +1,189 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: white;
+    font: 14px Arial, Helvetica, sans-serif;
+    color: black;
+}
+
+main {
+    width: 100%;
+    max-width: none;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0 20px 30px;
+    background-color: white;
+}
+
+h1 {
+    font-size: 29px;
+    line-height: 1.2;
+    margin: 0;
+    padding: 16px 0 19px;
+}
+
+#filterPanel {
+    width: 100%;
+    border: 1px solid #777;
+    padding: 7px;
+    min-height: 56px;
+}
+
+#filterToolbar {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    min-height: 22px;
+    width: 100%;
+}
+
+#filterField {
+    width: 140px;
+}
+
+select,
+input[type="text"] {
+    font: 13px Arial, sans-serif;
+    height: 21px;
+    padding: 1px 3px;
+    border: 1px solid #aaa;
+    border-radius: 0;
+    background-color: white;
+}
+
+#filterField {
+    border-radius: 4px;
+    background-color: #e8e8ed;
+}
+
+button {
+    font: 13px Arial, sans-serif;
+    padding: 1px 5px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    background-color: #e8e8ed;
+    color: black;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #d5d5db;
+}
+
+#apply {
+    margin-left: 5px;
+}
+
+#activeFilters {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 9px;
+    width: 100%;
+    margin-top: 8px;
+}
+
+#activeFilters:empty {
+    display: none;
+}
+
+.filterCard {
+    position: relative;
+    width: 307px;
+    max-width: 100%;
+    min-height: 56px;
+    padding: 7px 7px 8px;
+    border: 1px solid #d8d8d8;
+}
+
+.filterTitle {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.filterCard input[type="text"] {
+    width: 151px;
+    max-width: 100%;
+    margin-left: 15px;
+}
+
+.filterCard .choices {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding-left: 18px;
+}
+
+.filterCard .choices label {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.filterCard input[type="checkbox"] {
+    margin: 0;
+}
+
+.removeFilter {
+    position: absolute;
+    right: 3px;
+    bottom: 3px;
+    width: 16px;
+    height: 22px;
+    padding: 0;
+    font-size: 17px;
+    font-weight: bold;
+    line-height: 17px;
+}
+
+#message {
+    color: #a00000;
+    margin: 6px 0 0;
+}
+
+#message:empty {
+    display: none;
+}
+
+#resultCount {
+    margin: 0;
+    font-size: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+#tableContainer {
+    width: 100%;
+    padding: 14px 0;
+    overflow-x: auto;
+}
+
+#tableContainer table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 8px 12px;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+th {
+    font-weight: bold;
+}
+
+#tableContainer p {
+    margin-top: 12px;
+}
