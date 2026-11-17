@@ -1,0 +1,16 @@
+{
+  "name": "ca2",
+  "version": "1.0.0",
+  "description": "Card memory matching game",
+  "main": "main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^8.3.8"
+  }
+}
