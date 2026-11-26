@@ -1,4 +1,6 @@
 import {ShapeCard} from './shapecard.js';
+import {db} from './firebase.js';
+import {collection, addDoc, getDocs, serverTimestamp} from 'firebase/firestore';
 
 //MemoryGame custom element that manages the game logic and user interactions
 class MemoryGame extends HTMLElement {
@@ -55,6 +57,18 @@ class MemoryGame extends HTMLElement {
 
                     //Displays the results when all pairs have been matched
                     if (matchedPairs === total / 2) {
+                        // Save the completed game result to Firestore
+                        addDoc(collection(db, 'gameResults'), {
+                            clicks: clicks,
+                            completedAt: serverTimestamp()
+                        })
+                        .then(() => {
+                            console.log('Game result saved successfully.');
+                        })
+                        .catch(error => {
+                            console.error('Error saving game result:', error);
+                        });
+
                         this.innerHTML = '';
 
                         this.style.display = 'block';
@@ -90,3 +104,41 @@ class MemoryGame extends HTMLElement {
 }
 
 customElements.define('memory-game', MemoryGame);
+
+// Get the button and paragraph used to display the average
+const averageButton = document.getElementById('averageButton');
+const averageResult = document.getElementById('averageResult');
+
+averageButton.addEventListener('click', () => {
+
+    averageButton.disabled = true;
+    averageResult.textContent = 'Loading results...';
+
+    // Retrieve all completed game results from Firestore
+    getDocs(collection(db, 'gameResults'))
+    .then(snapshot => {
+
+        if (snapshot.empty) {
+            averageResult.textContent = 'No completed games found.';
+            return;
+        }
+
+        // Calculate the total number of clicks
+        const totalClicks = snapshot.docs.reduce((total, document) => {
+            return total + document.data().clicks;
+        }, 0);
+
+        // Calculate the average number of clicks
+        const averageClicks = totalClicks / snapshot.size;
+
+        averageResult.textContent =
+            `Average clicks: ${averageClicks.toFixed(2)}`;
+    })
+    .catch(error => {
+        console.error('Error retrieving game results:', error);
+        averageResult.textContent = 'Unable to retrieve game results.';
+    })
+    .finally(() => {
+        averageButton.disabled = false;
+    });
+});
