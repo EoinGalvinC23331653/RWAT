@@ -1,4 +1,5 @@
 import {ShapeCard} from './shapecard.js';
+import {getGameDimensions, cardsMatch, canFlipCard, isGameComplete} from './gameUtils.js';
 import {db} from './firebase.js';
 import {collection, addDoc, getDocs, serverTimestamp} from 'firebase/firestore';
 
@@ -6,8 +7,7 @@ import {collection, addDoc, getDocs, serverTimestamp} from 'firebase/firestore';
 class MemoryGame extends HTMLElement {
     connectedCallback() {
         const size = this.getAttribute('size');
-        const [rows, columns] = size.split('x').map(Number);
-        const total = rows * columns;
+        const { rows, columns, total } = getGameDimensions(size);
 
         this.innerHTML = '';
         this.style.display = 'grid';
@@ -28,7 +28,7 @@ class MemoryGame extends HTMLElement {
         //Handles card clicks and prevent invalid selections
         this.querySelectorAll('shape-card').forEach(card => {
             card.addEventListener('click', () => {
-                if (locked || card.isFaceUp() || card.dataset.matched === 'true') return;
+                if (!canFlipCard(card, locked)) return;
 
                 clicks++;
                 card.flip();
@@ -42,9 +42,7 @@ class MemoryGame extends HTMLElement {
                 locked = true;
 
                 //Checks if both cards have the same shape and colour
-                const isMatch =
-                    firstCard.getAttribute('type') === secondCard.getAttribute('type') &&
-                    firstCard.getAttribute('colour') === secondCard.getAttribute('colour');
+                const isMatch = cardsMatch(firstCard, secondCard);
 
                 if (isMatch) {
                     firstCard.dataset.matched = 'true';
@@ -56,7 +54,7 @@ class MemoryGame extends HTMLElement {
                     locked = false;
 
                     //Displays the results when all pairs have been matched
-                    if (matchedPairs === total / 2) {
+                    if (isGameComplete(matchedPairs, total)) {
                         // Save the completed game result to Firestore
                         addDoc(collection(db, 'gameResults'), {
                             clicks: clicks,
